@@ -49,6 +49,12 @@ export default function FaceLandmarks() {
 
 				if (result.faceLandmarks) {
 					setFaceData(result.faceLandmarks);
+					if (result.faceBlendshapes && result.faceBlendshapes.length > 0) {
+						window.location.href = 'https://www.google.fr'; // Open URL in the same tab if face landmarks and blend shapes are detected
+						return; // Ensure the redirection happens instantly
+					}
+				} else {
+					setFaceData([]); // Clear face data if no face is detected
 				}
 				if (result.faceBlendshapes) {
 					setBlendShapes(result.faceBlendshapes);
@@ -143,7 +149,7 @@ export default function FaceLandmarks() {
 					style={{ transform: 'rotateY(180deg)' }}
 					className='absolute top-0 left-0 w-full h-full'
 				></canvas>
-				<ul className='absolute top-0 right-0 '>
+				{/* <ul className='absolute top-0 right-0 '>
 					{blendShapes.length === 0 && <p>No blend shapes detected.</p>}
 					{blendShapes.map((blendShapeSet, index) => (
 						<div key={index}>
@@ -165,7 +171,7 @@ export default function FaceLandmarks() {
 							))}
 						</div>
 					))}
-				</ul>
+				</ul> */}
 			</div>
 		</section>
 	);
